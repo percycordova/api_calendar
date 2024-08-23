@@ -11,9 +11,9 @@ Instalar las siguientes dependencias dentro del proyecto
  npm i nodemon
  npm i express
  npm i dotenv
+ npm i express-validator
+ npm i mongoose
 ```
-
-
 
 ## Installation de dependecias globales
 
