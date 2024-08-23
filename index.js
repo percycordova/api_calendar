@@ -1,8 +1,11 @@
 const express = require("express")
+const { dbConnection } = require("./database/config")
 require("dotenv").config()
 // Crear el servidor de express
 const app = express()
 
+//Base de datos
+dbConnection()
 
 //Escuchar peticiones en el puerto 4500
 app.listen(process.env.PORT, () => {
