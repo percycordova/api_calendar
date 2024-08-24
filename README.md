@@ -13,6 +13,8 @@ Instalar las siguientes dependencias dentro del proyecto
  npm i dotenv
  npm i express-validator
  npm i mongoose
+ npm i bcryptjs
+ npm i jsonwebtoken
 ```
 
 ## Installation de dependecias globales

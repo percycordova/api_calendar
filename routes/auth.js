@@ -10,6 +10,7 @@ const { createUser, loginUser, renewToken } = require("../controllers/auth")
 const router = Router()
 const { check } = require("express-validator")
 const { validateFields } = require("../middlewares/validate-fields")
+const { validateJWT } = require("../middlewares/validate-jwt")
 
 router.post("/", [
   check("email", "El email es obligatorio").isEmail(),
@@ -18,7 +19,7 @@ router.post("/", [
   validateFields
 ], loginUser)
 
-router.get("/renew-token", renewToken)
+router.get("/renew-token",validateJWT ,renewToken)
 
 router.post(
   "/register",
