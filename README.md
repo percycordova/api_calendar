@@ -15,6 +15,8 @@ Instalar las siguientes dependencias dentro del proyecto
  npm i mongoose
  npm i bcryptjs
  npm i jsonwebtoken
+ npm i cors
+ npm i moment
 ```
 
 ## Installation de dependecias globales
