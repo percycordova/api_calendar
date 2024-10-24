@@ -24,11 +24,13 @@ router.get("/renew-token",validateJWT ,renewToken)
 router.post(
   "/register",
   [
-    check("name", "El nombre es obligatorio").not().isEmpty(),
+    check("name", "El nombre es obligatorio").trim().not().isEmpty(),
     check("email", "El email es obligatorio").isEmail(),
+    check("password", "La contraseña es obligatoria").trim().not().isEmpty(),
     check("password", "El password debe ser minimo de 6 caracteres").isLength({
       min: 6
     }),
+    
     validateFields
   ],
   createUser
