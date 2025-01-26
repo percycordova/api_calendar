@@ -24,25 +24,20 @@ const createCalendarEvent = async (req = request, res = response) => {
 
 const updateCalendarEvent = async (req = request, res = response) => {
   const eventId = req.params.id
-
   try {
-
     const event = await EventCalendar.findById(eventId)
-
     if (!event) {
       return res.status(404).json({
         ok: false,
         msg: "No existe el evento"
       })
     }
-
     if (event.user.toString() !== req.uid) {
       return res.status(401).json({
         ok: false,
         msg: "No autorizado"
       })
     }
-
     const newEvent = {
       ...req.body,
       user: req.uid
@@ -69,7 +64,8 @@ const updateCalendarEvent = async (req = request, res = response) => {
 const getCalendarEvents = async (req = request, res = response) => {
   //  Me trae los eventos con el campo nombre que viene de la tabla usuario 
   // const events = await EventCalendar.find().populate("user","name")
-  const events = await EventCalendar.find().populate("user", "name")
+  //get name y lastaname
+  const events = await EventCalendar.find().populate("user", "name lastName")
   res.json({
     ok: true,
     events
@@ -113,8 +109,6 @@ const deleteCalendarEvent = async (req = request, res = response) => {
   }
 
 }
-
-
 
 module.exports = {
   createCalendarEvent,

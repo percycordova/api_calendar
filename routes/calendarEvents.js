@@ -1,8 +1,6 @@
 /*
-
 Rutas de eventos del calendario / Calendar Events
 host + /api/calendar-events
-
 */
 
 const { Router } = require("express")
@@ -25,8 +23,5 @@ router.post("/", [
 ], createCalendarEvent)
 router.put("/:id", updateCalendarEvent)
 router.delete("/:id", deleteCalendarEvent)
-
-
-
 
 module.exports = router

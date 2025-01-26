@@ -25,6 +25,8 @@ router.post(
   "/register",
   [
     check("name", "El nombre es obligatorio").trim().not().isEmpty(),
+    check("lastName", "El nombre es obligatorio").trim().not().isEmpty(),
+    check("dni", "El dni es obligatorio").trim().not().isEmpty(),
     check("email", "El email es obligatorio").isEmail(),
     check("password", "La contraseña es obligatoria").trim().not().isEmpty(),
     check("password", "El password debe ser minimo de 6 caracteres").isLength({

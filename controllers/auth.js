@@ -22,12 +22,15 @@ const createUser = async (req = request, res = response) => {
     await user.save()
 
     // Generar el JWT
-    const token = await generateJWT(user._id, user.name)
+    const token = await generateJWT(user._id, user.name, email)
 
     res.status(201).json({
       ok: true,
       uid: user._id,
       name: user.name,
+      email: user.email,
+      dni: user.dni,
+      lastName: user.lastName,
       token
     })
 
@@ -67,12 +70,15 @@ const loginUser = async (req, res = response) => {
     }
 
     // Generar el JWT
-    const token = await generateJWT(user._id, user.name)
+    const token = await generateJWT(user._id, user.name, user.email)
 
     res.json({
       ok: true,
       uid: user._id,
       name: user.name,
+      email: user.email,
+      dni: user.dni,
+      lastName: user.lastName,
       token
     })
 
@@ -88,18 +94,30 @@ const loginUser = async (req, res = response) => {
 
 const renewToken = async (req, res = response) => {
 
-  const { uid, name } = req
+  const { uid, name, email } = req
+  try {
+    // Generar el JWT
+    const token = await generateJWT(uid, name, email)
+    const user = await User.findOne({ email })
+    res.json({
+      message: "Renew Token",
+      ok: true,
+      token,
+      uid,
+      name,
+      email,
+      dni: user.dni,
+      lastName: user.lastName
+    })
 
-  // Generar el JWT
-  const token = await generateJWT(uid, name)
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({
+      msg: "Error en el servidor",
+      ok: false
+    })
+  }
 
-  res.json({
-    message: "Renew Token",
-    ok: true,
-    token,
-    uid,
-    name
-  })
 }
 
 module.exports = {
